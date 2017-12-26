@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
+    <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./templets/css/screen.css" />
+    <link rel="alternate" type="application/rss+xml" title="Ghost 开源博客平台" href="http://www.ghostchina.com/rss/" />
+    <link rel="canonical" href="http://www.ghostchina.com/" /> 
+    <link rel="next" href="http://www.ghostchina.com/page/2/" />
+
+   <!-- 新闻 -->
+    <link href="http://wenda.ghostchina.com/static/css/default/ico/favicon.ico?v=20140930" rel="shortcut icon" type="image/x-icon" />    
+    <link rel="stylesheet" type="text/css" href="http://wenda.ghostchina.com/static/css/icon.css" />    
+    <link href="http://wenda.ghostchina.com/static/css/default/common.css?v=20140930" rel="stylesheet" type="text/css" />
+    <link href="http://wenda.ghostchina.com/static/css/default/link.css?v=20140930" rel="stylesheet" type="text/css" />
+    <link href="http://wenda.ghostchina.com/static/js/plug_module/style.css?v=20140930" rel="stylesheet" type="text/css" />
+    
+    <!-- 产品 -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Alef:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" />
+    <!-- <link type="text/css" href="./templets/css/font-awesome.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" type="text/css" href="./templets/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="./templets/css/scrollbar.css" />
+    <link type="text/css" href="./templets/css/Proprep.css" rel="stylesheet" />
+    <link href="./templets/images/favicon.ico" rel="Favicon" type="image/x-icon" />
+    <!-- <link href="/Content/kendo/kendo.rtl.min.css" rel="stylesheet"/>
+    <link href="/Content/kendo/kendo.dataviz.min.css" rel="stylesheet"/> -->
+
+
+     <meta name="referrer" content="origin" />
+    <title>React route 4</title>
+    <style >
+        
+    .carousrl-img{
+        width:100%;
+    }
+    #carousel-example-generic { 
+    background: #ffffff;
+    border-top: 1px solid #ebebeb;
+    margin-bottom: 35px;
+    border-bottom: 2px solid #e1e1e1;
+      
+    }
+    #carousel-example-generic .carousel-inner .item  .imgs{         
+                 width:100%;
+                height:450px;
+           
+   }
+   .InnerContainer {
+        max-width: none !important;
+        padding: 0px !important;
+    }
+
+    .panel {
+        margin-bottom: 0px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: 1px 1px 1px r;
+        box-shadow: 1px 1px 1px #000000
+    }
+
+    .panel-warning {
+        border-color: #000;
+    }
+
+        .panel-warning > .panel-heading {
+            color: #8a6d3b;
+            background-color: #ffc21f;
+            border-color: #000;
+        }
+
+    .panel-heading {
+        padding: 10px 0px 10px 5px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+        .panel-heading h2 {
+            font-weight: 700;
+            font-size: 20px;
+            color: #231f20;
+            padding-bottom: 0px;
+        }
+  
+    
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="bundle.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <script src="//cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
+    <script type="text/javascript" src="./templets/js/ghost-url.min.js?v=a8de6833b5"></script>
+      <script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+    <!-- <script src="./templets/js/main.js?v=a8de6833b5"></script>$(...)is mot defined -->
+<!-- news -->
+    <script src="http://wenda.ghostchina.com/static/js/jquery.2.js?v=20140930" type="text/javascript"></script>
+    <script src="http://wenda.ghostchina.com/static/js/jquery.form.js?v=20140930" type="text/javascript"></script>
+    <script src="http://wenda.ghostchina.com/static/js/plug_module/plug-in_module.js?v=20140930" type="text/javascript"></script>
+    <script src="http://wenda.ghostchina.com/static/js/aws.js?v=20140930" type="text/javascript"></script>
+    <script src="http://wenda.ghostchina.com/static/js/app.js?v=20140930" type="text/javascript"></script>
+    <script type="text/javascript" src="http://wenda.ghostchina.com/static/js/compatibility.js"></script>
+    <script type="text/javascript">
+        var _43C492ABADBC6673893F2ACA10ED3C22='';
+        var G_POST_HASH=_43C492ABADBC6673893F2ACA10ED3C22;
+        var G_INDEX_SCRIPT = '';
+        var G_SITE_NAME = 'Ghost中文网';
+        var G_BASE_URL = 'http://wenda.ghostchina.com';
+        var G_STATIC_URL = 'http://wenda.ghostchina.com/static';
+        var G_UPLOAD_URL = 'http://wenda.ghostchina.com/uploads';
+        var G_USER_ID = '';
+        var G_USER_NAME = '';
+        var G_UPLOAD_ENABLE = 'N';
+        var G_UNREAD_NOTIFICATION = 0;
+        var G_NOTIFICATION_INTERVAL = 100000;
+        var G_CAN_CREATE_TOPIC = '';
+        
+        </script>
+    <script src="http://wenda.ghostchina.com/static/js/aw_template.js?v=20140930" type="text/javascript"></script>
+        
+    
+    <script>
+     $(function(){
+            $('.post-content img').each(function(item){
+                var src = $(this).attr('src');
+
+                $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
+            });
+
+            /*$('.post-content').magnificPopup({
+              delegate: 'a',
+              type: 'image'
+            });*/
+        });
+    </script>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+    <script>
+    $(function(){
+        $('.carousel').carousel({
+        interval: 2000
+        })
+        $('.main-navigation .container .row .collapse .menu>li').on("click",function(e){
+            $('.main-navigation .container .row .collapse .menu>li').removeClass("nav-current");
+            $(this).addClass("nav-current");
+        })
+    })
+    </script>
+</body>
+</html>
