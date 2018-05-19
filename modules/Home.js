@@ -1,182 +1,184 @@
 import React,{Component}  from 'react';
 import {connect} from 'react-redux';
 import {fetchNewsList} from '../actions/news';
-import {fetchProList} from '../actions/product';
-import { Router,Route,hashHistory,IndexRoute,Link} from 'react-router';
-var moment = require('moment');
+import {fetchProsList,addToCart} from '../actions/products';
+import NavLink from './NavLink';
 
 class Home extends Component{
     componentWillMount(){
         this.props.fetchNewsList();
-        this.props.fetchProList();
+        this.props.fetchProsList();
     }
-    render(){
-        const {fetchNewsList,newsList,fetchProList,proList} = this.props;
-
-       if(newsList && newsList.rows && proList && proList.rows){
-           var newsData=newsList.rows.map(function(item,index){
-            var newsTime=item.date;
-            return (
-                <div className="row">
-                <main className="col-md-8 main-content" key={index}>
-                    <article id='109' className="post tag-android tag-ke-hu-duan">
-                    <div className="post-head">
-                    {/*新闻标题*/}
-                        <h1 className="post-title"><a href="/android-app-for-ghost/">{item.title}</a></h1>
-                        <div className="post-meta">
-                            <span className="author">作者：<a href="/author/wangsai/">{item.author}</a></span> &bull;
-                            <time className="post-date">{moment({newsTime}).format('YYYY MM DD')}</time>
-                        </div>
-                        </div>
-                        <div className="featured-media">
-                            <a href="/android-app-for-ghost/"><img src={`http://localhost:3000/${item.img}`} alt="Android 版 Ghost 客户端来了" /></a>
-                        </div>
-                        {/*新闻内容*/}
-                        <div className="post-content">
-                        <p>内容：{item.content}</p>
-                        </div>
-                        <div className="post-permalink">
-<Link to={{pathname:"/newsList",state:{'id':item._id}}}  className="btn btn-default">阅读全文</Link>
-                        
-                        </div>
-                        <footer className="post-footer clearfix">
-                        <div className="pull-left tag-list">
-                            <i className="fa fa-folder-open-o"></i>
-                            <a href="/tag/android/">阅读量：{item.commentCount}</a>, <a href="/tag/ke-hu-duan/">评论数：{item.commentCount}</a>
-                        </div>
-                        <div className="pull-right share">
-                        </div>
-                    </footer>
-                     </article> 
-                 </main>
-                 <aside className="col-md-4 sidebar" key={index+100}>
-                 
-                     <div className="widget">
-                     <h4 className="title">推荐商品()</h4>
-                     <div className="content community">
-                     <p>{}</p>
-                     <p><Link href="http://wenda.ghostchina.com/" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '问答社区'])"><i className="fa fa-comments"></i> 商品颜色{item.color}</Link></p>
-                     <p><Link href="http://weibo.com/ghostchinacom" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '官方微博'])"><i className="fa fa-weibo"></i> 商品详情：{item.detail}</Link></p>
-                     </div>
-                     </div>
-                 
-                     <div className="widget">
-                     <h4 className="title">商品图片</h4>
-                     <div className="content download" >
-                     <a href="/download/" className="btn btn-default btn-block" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '下载Ghost'])">Ghost 中文版（0.7.4）</a>
-                     </div>
-                     </div>
-                 
-                     <div className="widget">
-                     <h4 className="title">标签云</h4>
-                     <div className="content tag-cloud">
-                     <a href="/tag/ke-hu-duan/">客户端</a>
-                     <a href="/tag/android/">Android</a>
-                     <a href="/tag/jquery/">jQuery</a>
-                     <a href="/tag/ghost-0-7-ban-ben/">Ghost 0.7 版本</a>
-                     <a href="/tag/opensource/">开源</a>
-                     <a href="/tag/zhu-shou-han-shu/">助手函数</a>
-                     <a href="/tag/tag-cloud/">标签云</a>
-                     <a href="/tag/navigation/">导航</a>
-                     <a href="/tag/customize-page/">自定义页面</a>
-                     <a href="/tag/static-page/">静态页面</a>
-                     <a href="/tag/roon-io/">Roon.io</a>
-                     <a href="/tag/configuration/">配置文件</a>
-                     <a href="/tag/upyun/">又拍云存储</a>
-                     <a href="/tag/upload/">上传</a>
-                     <a href="/tag/handlebars/">Handlebars</a>
-                     <a href="/tag/email/">邮件</a>
-                     <a href="/tag/shortcut/">快捷键</a>
-                     <a href="/tag/yong-hu-zhi-nan/">用户指南</a>
-                 
-                 
-                     <a href="/tag-cloud/">...</a>
-                     </div>
-                     </div>
-                             
-                     </aside>
-
-                     </div>
+    addCart(e){
+        const idx = e.target.getAttribute('data-idx');
+        const addToCartProduct = this.props.prosLists.rows[idx];
+        this.props.addToCart(addToCartProduct)
+    }
+    render(){       
+        const {newsLists,prosLists,fetchNewsList,fetchProsList} = this.props;      
+        if(!newsLists.rows||!prosLists.rows){
+            return <div>数据请求中...</div>
+        }
+        
+        var showNews = [];
+        for(let i=0;i<newsLists.rows.length;i++){
+            if(i%2){
+                showNews.push(                           
+                    <li className="list-group-item" key={i} style={{height:'250px'}}>
+                        <NavLink to={`/newDetail/${newsLists.rows[i]._id}`} style={{color:'#000',width:'100%',height:'100%',overflow:'hidden'}}>
+                            <div style={{float:'left',width:'25%',height:'100%'}}>
+                                <img 
+                                    src={`http://localhost:3000/${newsLists.rows[i].thumb.filename}`} 
+                                    style={{ width:'100%',height:'100%'}} 
+                                />
+                            </div>                
+                            <div style={{float:'right',height:'100%',width:'70%'}}>
+                                <h2 style={{width:'100%',textAlign:'center'}}>
+                                    {newsLists.rows[i].title}
+                                </h2>
+                                <p style={{overflow:'hidden',height:'45%',width:'100%'}}>
+                                    {newsLists.rows[i].content}
+                                </p>
+                                <div style={{overflow:'hidden',width:'100%'}}>
+                                    <span style={{float:'left'}}>
+                                        {newsLists.rows[i].date}
+                                    </span>
+                                    <span style={{float:'right'}}>
+                                        评论数：
+                                        <span style={{color:'red'}}>
+                                            {newsLists.rows[i].count}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </NavLink>
+                    </li>
+                )
+            }else{
+                showNews.push(                           
+                    <li className="list-group-item" key={i} style={{height:'250px'}}>
+                        <NavLink to={`/newDetail/${newsLists.rows[i]._id}`} style={{color:'#000',width:'100%',height:'100%',overflow:'hidden'}}>
+                            <div style={{float:'right',width:'25%',height:'100%'}}>
+                                <img 
+                                    src={`http://localhost:3000/${newsLists.rows[i].thumb.filename}`} 
+                                    style={{ width:'100%',height:'100%'}} 
+                                />
+                            </div>                
+                            <div style={{float:'left',height:'100%',width:'70%'}}>
+                                <h2 style={{width:'100%',textAlign:'center'}}>
+                                    {newsLists.rows[i].title}
+                                </h2>
+                                <p style={{overflow:'hidden',height:'45%',width:'100%'}}>
+                                    {newsLists.rows[i].content}
+                                </p>
+                                <div style={{overflow:'hidden',width:'100%'}}>
+                                    <span style={{float:'left'}}>
+                                        {newsLists.rows[i].date}
+                                    </span>
+                                    <span style={{float:'right'}}>
+                                        评论数：
+                                        <span style={{color:'red'}}>
+                                            {newsLists.rows[i].count}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </NavLink>
+                    </li>
+                )
+            }                      
+        }
+        var showPros = [];
+        for(let i=0;i<2;i++){
+            var showPro = [];
+            var Pro = []
+            for(let j=0;j<2;j++){
+                var index = i*2+j;
+                Pro.push(
+                    <div key={index} style={{float:'left',width:'50%',height:'100%',border:'1px #ccc solid'}}>
+                        <div style={{width:'100%',height:'50%',textAlign:'center'}}>
+                            <img 
+                                src={`http://localhost:3000/${prosLists.rows[index].thumb.filename}`} 
+                                style={{ width:'50%',height:'100%'}} 
+                            />
+                        </div>                
+                        <div style={{height:'50%',width:'100%'}}>
+                            <h2 style={{width:'100%',textAlign:'center'}}>
+                                {prosLists.rows[index].title}
+                            </h2>
+                            <div style={{overflow:'hidden',width:'100%'}}>
+                                <div style={{float:'left',width:'60%'}}>
+                                    <p style={{paddingLeft:'50px',height:"60px",overflow:'hidden'}}>
+                                        描述：{prosLists.rows[index].description}
+                                    </p>
+                                    <p style={{paddingLeft:'50px'}}>
+                                        库存：<span style={{fontSize:'16px'}}>
+                                                {prosLists.rows[index].amount}
+                                            </span>
+                                    </p>                                       
+                                </div>
+                                <div style={{float:'right',width:'40%'}}>
+                                    <p style={{paddingLeft:'50px'}}>
+                                        <span style={{display:'block',background:'green',width:'80px',height:'24px',textAlign:'center',lineHeight:'24px',color:'#fff',borderRadius:'5px',textDecoration:'line-through'}}>
+                                            原价：{prosLists.rows[index].originalPrice}
+                                        </span>
+                                        
+                                    </p>
+                                    <p style={{paddingLeft:'50px'}}>
+                                        <span style={{display:'block',background:'red',width:'100px',height:'36px',textAlign:'center',lineHeight:'36px',color:'#fff',borderRadius:'5px'}}>
+                                            秒杀价：{prosLists.rows[index].currentPrice}
+                                        </span>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <div style={{textAlign:'center'}}>
+                                <button type="button" data-idx={index} className="btn btn-warning btn-lg" onClick={ (e)=> {this.addCart(e)} }>加入购物车</button>
+                            </div>
+                        </div> 
+                    </div>  
+                )
+            }
+            showPro = (
+                <li className="list-group-item" key={i} style={{height:'500px',overflow:'hidden'}}>
+                    {Pro}
+                </li>
             )
-        })
-       }
+            showPros.push(showPro)
+        }
 
         return (
-              <div className='container'>  
-              {/*新闻*/}  
-            <div id="carousel-example-generic" className="carousel slide" data-ride="carousel" data-interval="1000">
-            <ol className="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-            </ol>
-            
-            <div className="carousel-inner" role="listbox">
-                    <div className="item active">
-                        <img className="imgs" src="./templets/images/1.jpeg" alt="..."/>
-                        <div className="carousel-caption">
-                           
-                            <p>钱多钱少，不如一口打心底舒服的热乎饭</p>
-                        </div>
+            <div>
+                <div className="panel panel-success" style={{marginTop:'20px'}}>
+                    <div className="panel-heading" style={{overflow:'hidden'}}>
+                        <span style={{float:'left',fontSize:'16px'}}>最新新闻</span>
+                        <NavLink to="/news" style={{float:'right'}}>查看更多</NavLink>
                     </div>
-
-                    <div className="item">
-                        <img  className="imgs" src="./templets/images/2.jpeg" alt="..."/>
-                        <div className="carousel-caption">
-                            
-                            <p>为兄弟两肋插刀，兄弟却总是插他两刀</p>
-                        </div>
-                    </div>
-
-                    <div className="item">
-                    <img  className="imgs" src="./templets/images/3.jpeg" alt="..."/>
-                    <div className="carousel-caption">
-                       
-                        <p>没想到，你是这样的故宫博物院院长！</p>
-                    </div>
-                    </div>
-
-                    <div className="item">
-                    <img  className="imgs" src="./templets/images/4.jpeg" alt="..."/>
-                    <div className="carousel-caption">
-                       {/*<h3></h3>*/}
-                       <p>被面膜毁掉的中国女人</p>
-                    </div>
-                    </div>
-            
-            </div>
-                <a className="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span className="sr-only">Previous</span>
-                </a>
-
-                <a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span className="sr-only">Next</span>
-                </a>
-        </div>
-          {/*新闻*/}
-          <section className="content-wrap">
-            <div className="container">
-             {/*news*/}
-             {newsData}
-            {/*aside*/}
-         
+                    <ul className="list-group">
+                        {showNews}
+                    </ul>
                 </div>
-            </section>
-</div>
-           
+
+                <div className="panel panel-info" style={{marginTop:'20px'}}>
+                    <div className="panel-heading" style={{overflow:'hidden'}}>
+                        <span style={{float:'left',fontSize:'16px'}}>最新产品</span>
+                        <NavLink to="/products" style={{float:'right'}}>查看更多</NavLink>
+                    </div>
+                    <ul className="list-group">
+                        {showPros}
+                    </ul>
+                </div>
+
+            </div>
         )
     }
 }
-const getValue=(state)=>{
-    // console.log(state)
-    return{
-        newsList:state.newsData.newsList,
-        proList:state.proData.proList
+const getValue = (state)=>{
+    return {
+        newsLists: state.news.newsLists,
+        prosLists: state.products.prosLists,
     }
 }
-const HomeContext=connect(getValue,{fetchNewsList,fetchProList})(Home)
+const HomeContext = connect(getValue,{fetchNewsList,fetchProsList,addToCart})(Home)
+
 module.exports = HomeContext;
-   

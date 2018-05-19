@@ -1,94 +1,161 @@
-export const newsList=(data)=>{
+export const getListData=(data)=>{
     return {
-        type:"GETNEWSLIST",
-        data
-    }
-}
-export const oneNews=(data)=>{
-    return {
-        type:"GETONENEWS",
-        data
-    }
-}
-export const cateList=(data)=>{
-    return {
-        type:"GETCATELIST",
+        type:'GETNEWSLISTS',
         data
     }
 }
 
 export function fetchNewsList(params){
     return dispatch=>{
-        var url = 'http://localhost:3000/news/dataList';
-        return fetch(url,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded'
-                
-            },
-            body:JSON.stringify(params)
-        })
-        .then(res=>{
-            return res.json();
-            
-        })
-        .then(data=>{
-            dispatch(newsList(data));
-            
-        })
-    }
-}
-export function fetchOneNews(params){
-    return dispatch=>{
-        var url = 'http://localhost:3000/news/data/'+params;
-        return fetch(url,{
-            method:'get',     
-        })
-        .then(res=>{
-            return res.json();
-        })
-        .then(data=>{
-            dispatch(oneNews(data));
-            console.log(data,'齐真真')
-        })
-    }
-}
-
-export function fetchCateList(){
-    return dispatch=>{
-        var url = 'http://localhost:3000/cate/list/1';
-        return fetch(url,{method:'GET'})
+        var url = 'http://localhost:3000/news/list';
+        var data = params;
+        return fetch(url, {  
+            method: 'post',
+            body:JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+              }
+           })
         .then(res=>{
             return res.json()
         })
         .then(data=>{
-            dispatch(cateList(data))
+            dispatch(getListData(data))
         })
     }
 }
 
-export function fetchNewsCate(id){
-    return dispatch=>{
-        var url = `http://localhost:3000/cate/data${id}`;
-        return fetch(url,{method:'GET'})
-        .then(res=>{
-            return res.json()
-        })
-        .then(data=>{
-            dispatch(newsCate(data))
-        })
+export const getCateData=(data)=>{
+    return {
+        type:'GETNEWSCATE',
+        data
     }
 }
-export function fetchNewsComment(id){
+
+export function fetchNewsCate(){
     return dispatch=>{
-        var url = `http://localhost:3000/cate/data${id}`;
-        return fetch(url,{method:'GET'})
+        var url = `http://localhost:3000/cate/list/${1}`;
+        return fetch(url, {  
+            method: 'get',
+           })
         .then(res=>{
             return res.json()
         })
         .then(data=>{
-            dispatch(newsCate(data))
+            dispatch(getCateData(data))
         })
     }
 }
 
+export const getNew=(data)=>{
+    return {
+        type:'GETNEW',
+        data
+    }
+}
+
+export function fetchNew(id){
+    return dispatch=>{
+        var url = `http://localhost:3000/news/data/${id}`;
+        return fetch(url, {  
+            method: 'get',
+           })
+        .then(res=>{
+            return res.json()
+        })
+        .then(data=>{
+            dispatch(getNew(data))
+        })
+    }
+}
+
+export const getComments=(data)=>{
+    return {
+        type:'GETCOMMENTS',
+        data
+    }
+}
+
+export function fetchComments(data){
+    return dispatch=>{
+        var url = 'http://localhost:3000/comments/list';
+        return fetch(url,{  
+            method: 'post',
+            body:JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+              }
+           })
+        .then(res=>{
+            return res.json()
+        })
+        .then(data=>{
+            dispatch(getComments(data))
+        })
+    }
+}
+
+export const changecate = (data)=>{
+    return {
+        type: 'CHANGECATE',
+        data
+    }
+}
+
+export function changeCate(params){
+    return dispatch=>{
+        dispatch(changecate(params))
+    }
+}
+
+export const changepage= (data)=>{
+    return {
+        type: 'CHANGEPAGE',
+        data
+    }
+}
+
+export function changePage(params){
+    return dispatch=>{
+        dispatch(changepage(params))
+    }
+}
+
+export const search= (data)=>{
+    return {
+        type: 'SEARCH',
+        data
+    }
+}
+
+export function searchNews(params){
+    return dispatch=>{
+        dispatch(search(params))
+    }
+}
+
+export const changeComment= (data)=>{
+    return {
+        type: 'CHANGECOMMENTAREA',
+        data
+    }
+}
+
+export function changeCommentArea(params){
+    return dispatch=>{
+        dispatch(changeComment(params))
+    }
+}
+
+export function addComment(data){
+    return dispatch=>{
+        var url = 'http://localhost:3000/comments/data';
+        return fetch(url,{  
+            method: 'post',
+            body:JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+              }
+           })
+    }
+}

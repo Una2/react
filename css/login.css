@@ -1,0 +1,175 @@
+#header .nav-tab .sort .product-list {
+  display: none;
+}
+#wrapper {
+  margin: 0 auto;
+  width: 980px;
+  height: 520px;
+}
+.gray_border_box {
+  height: 520px;
+  /* border: 1px solid #C6E6F3; */
+  margin-top: 10px;
+  padding: 10px;
+  text-align: left;
+  width: 958px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  float: left;
+}
+.loadingproc img {
+  position: relative;
+  top: 4px;
+  margin-right: 3px;
+}
+.loadingproc {
+  visibility: hidden;
+}
+#reg-btn {
+  height: 29px;
+  width: 90px;
+  margin-left: 170px;
+  margin-bottom: 20px;
+}
+.log-reg-box {
+  height: 453px;
+  width: 455px;
+  float: left;
+  margin-top: 40px;
+  padding: 0 10px;
+}
+.log-tit {
+  height: 43px;
+  width: 439px;
+  background-image: url(../images/reg-bg.png);
+  background-repeat: no-repeat;
+  background-position: -162px -153px;
+  margin-bottom: 37px;
+}
+#frmUserLogin {
+  margin: 0px;
+}
+.input {
+  height: 55px;
+  margin-left: 50px;
+  font-size: 12px;
+}
+.width60 {
+  width: 88px;
+  height: 25px;
+  line-height: 23px;
+  text-align: left;
+  float: left;
+}
+.fixlogininput {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  width: 200px;
+  padding: 2px;
+  border: 1px solid #7f9db9;
+}
+.reg_errmsg {
+  color: #ff0000;
+}
+.img_right {
+  margin-left: 3px;
+  display: none;
+}
+.loadingproc img {
+  position: relative;
+  top: 4px;
+  margin-right: 3px;
+}
+img {
+  vertical-align: top;
+  border: 0 none;
+}
+.tip {
+  height: 25px;
+  font-size: 12px;
+  line-height: 25px;
+  padding-left: 65px;
+  position: relative;
+  color: #515151;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  white-space: normal;
+}
+.input a:link {
+  color: #00B6F2;
+  text-decoration: none;
+}
+.input a:visited {
+  color: #00B6F2;
+}
+#login-btn {
+  height: 29px;
+  width: 190px;
+  float: left;
+  margin-left: 132px;
+  display: inline;
+}
+#login_loading {
+  visibility: hidden;
+  white-space: normal;
+}
+.ver-line {
+  background-image: url(../images/reg-bg.png);
+  background-repeat: no-repeat;
+  height: 403px;
+  width: 1px;
+  float: left;
+  background-position: -928px -83px;
+}
+.log-reg-box {
+  height: 453px;
+  width: 455px;
+  float: left;
+  margin-top: 40px;
+  padding: 0 10px;
+}
+.reg-tit {
+  height: 43px;
+  width: 439px;
+  background-image: url(../images/reg-bg.png);
+  background-repeat: no-repeat;
+  background-position: -163px -197px;
+  margin-left: 16px;
+  margin-bottom: 37px;
+}
+#frmuserregister .ehong-idcode1-val {
+  position: relative;
+  padding: 1px 4px 1px 4px;
+  top: 0px;
+  *top: -3px;
+  letter-spacing: 4px;
+  display: inline;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  font-weight: bold;
+}
+#frmuserregister .ehong-idcode1-val0 {
+  border: solid 1px #A4CDED;
+  background-color: #ECFAFB;
+}
+#frmuserregister .ehong-idcode1-val1 {
+  border: solid 1px #A4CDED;
+  background-color: #FCEFCF;
+}
+#frmuserregister .ehong-idcode1-val2 {
+  border: solid 1px #6C9;
+  background-color: #D0F0DF;
+}
+#frmuserregister .ehong-idcode1-val3 {
+  border: solid 1px #6C9;
+  background-color: #DCDDD8;
+}
+#frmuserregister .ehong-idcode1-val4 {
+  border: solid 1px #6C9;
+  background-color: #F1DEFF;
+}
+#frmuserregister .ehong-idcode1-val5 {
+  border: solid 1px #6C9;
+  background-color: #ACE1F1;
+}

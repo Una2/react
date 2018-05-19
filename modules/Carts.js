@@ -1,65 +1,86 @@
 import React,{Component}  from 'react';
 import {connect} from 'react-redux';
-import { Button,Form,Table } from 'element-react';
-import {Link} from "react-router";
-import {addToCart,decToCart,remCart} from '../actions/counter'
-
-import 'element-theme-default';
-
 var _ = require('lodash');
+import NavLink from './NavLink';
 
 class Carts extends Component{
-    constructor(props) {
-        super(props);
-    }
-    oonCurrentChange(){
-        console.log(1111111111111111111111111)
-    }
     render(){
-        const {carts,addToCart,decToCart,remCart} = this.props;
-
-        if(!carts){
-            return(<div>数据请求中。。。。</div>)
-        }
-       
-        var cartsList = _.uniqWith(carts,_.isEqual);
+        const {carts} = this.props;
         var output = [];
-        for(let i =0;i<cartsList.length;i++){
-            output.push(
-                <li key={i}>名称：{cartsList[i].title} 数量：{cartsList[i].quantity}</li>
+        var cartput;
+        var sumprice = 0;
+        if(carts.length>0){
+            var cartsList = [];
+            for(let i=0;i<carts.length;i++){
+                cartsList.unshift(carts[i]);
+            }
+            cartsList = _.uniqWith(cartsList,function(a,b){
+                if(a._id==b._id){
+                    return true;
+                }
+            });
+            for(let i =0;i<cartsList.length;i++){
+                sumprice += cartsList[i].currentPrice*cartsList[i].quantity;
+                output.push(
+                    <tr  key={i}>
+                        <th scope="row">{i}</th>
+                        <th>
+                        <img 
+                            src={`http://localhost:3000/${cartsList[i].thumb.filename}`} 
+                            style={{ width:'50px',height:'50px'}} 
+                        />
+                        </th>
+                        <th>{cartsList[i].title}</th>
+                        <th>{cartsList[i].currentPrice}</th>
+                        <th>{cartsList[i].quantity}</th>
+                        <th>{cartsList[i].currentPrice*cartsList[i].quantity}</th>
+                    </tr>
+                )
+            }
+
+            cartput = (
+                <div className="panel panel-danger" style={{marginTop:'20px'}}>
+                    <div className="panel-heading" style={{overflow:'hidden'}}>
+                        <span style={{float:'left',fontSize:'16px'}}>您的购物车</span>
+                        <NavLink to="/products" style={{float:'right'}}>继续购买</NavLink>
+                    </div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>图片</th>
+                                <th>名称</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {output}
+                        </tbody>
+                    </table>
+                    <div className="panel-footer" style={{textAlign:'right',paddingRight:'20px'}} >
+                        合计：
+                        <span style={{color:'red',textAlign:'center',fontSize:'18px',marginRight:'20px'}}>
+                            {sumprice}
+                        </span>
+                        <button type="button" className="btn btn-warning">结算</button>
+                    </div>
+                </div>
+            )
+            
+        }else{
+            cartput = (
+                <div className="panel panel-default" style={{margin:'20px',height:'300px'}}>
+                    <div className="panel-body" style={{textAlign:'center',lineHeight:'260px',fontSize:'24px'}}>                        
+                        <NavLink to="/products">购物车空空的，快去挑选商品吧！</NavLink>
+                    </div>
+                </div>
             )
         }
-        if(cartsList){
-            var table=[];
-            table.push(
-                <Table
-                style={{width: '100%'}}
-                columns={[
-                  
-                    {label: "产品",prop: "name"},
-                        {label: "缩略图",prop: "img",render:(row)=>{
-                            return <img src={`http://localhost:3000/${row.img[0]}`} width="50" height="50" />
-                        }},
-                        {label:"单价",prop:"price"},
-                        {label:"数量",prop:"count"},
-                        {label: "合计",prop: "price",width: 180,render:(row)=>{
-                            return row.price * row.count
-                        }},
-                        {label: "操作",prop: "zip",width:150,fixed: 'right',render: (row,column,index)=>{
-                            return <span>
-                            <Button onClick={()=>{addToCart(row)}} type="text" size="small">+</Button>&nbsp;&nbsp;
-                            <Button onClick={()=>{decToCart(row)}} type="text" size="small">-</Button>&nbsp;&nbsp;
-                            <Button type="text" size="small" onClick={()=>{remCart(row)}}>移除</Button></span>
-                        }}]}
-                data={cartsList}
-                />
-            )
-        }
-      
-     return (
+        return (
             <div>
-               
-            {table}
+                 {cartput}       
             </div>
         )
     }
@@ -67,9 +88,9 @@ class Carts extends Component{
 
 const getValue = (state)=>{
     return {
-        carts: state.reducer.carts
+        carts: state.products.carts
     }
 }
-const CartsContext = connect(getValue,{addToCart,remCart,decToCart})(Carts)
+const CartsContext = connect(getValue)(Carts)
 
 module.exports = CartsContext;

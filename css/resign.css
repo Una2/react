@@ -1,0 +1,70 @@
+#header .nav-tab .sort .product-list{display:none;}
+
+#resiger .reg-box {
+  border: 1px solid #C6E6F3;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  text-align: left;
+  width: 958px;
+}
+#resiger .reg-box .reg-tit {
+  height: 41px;
+  width: 620px;
+  background-image: url(../images/reg-bg.png);
+  background-repeat: no-repeat;
+  background-position: -162px -69px;
+  margin-bottom: 37px;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+}
+#resiger .reg-box form {
+  margin-left: 200px;
+}
+#resiger .reg-box .reginputbox .input {
+  height: 55px;
+  margin-left: 50px;
+  font-size: 12px;
+}
+#resiger .reg-box .reginputbox .width60 {
+  width: 60px;
+  height: 25px;
+  line-height: 23px;
+  text-align: right;
+  float: left;
+}
+#resiger .reg-box .reginputbox .input_failure {
+  border: 1px solid maroon;
+  background-color: #FFFDDF;
+  color: #8B0000;
+}
+#resiger .reg-box .reginputbox .fixlogininput {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  width: 200px;
+  padding: 2px;
+  border: 1px solid #7f9db9;
+}
+#resiger .reg-box .reginputbox .reg_errmsg {
+  color: #ff0000;
+}
+#resiger .reg-box .reginputbox .tip {
+  height: 25px;
+  font-size: 12px;
+  line-height: 25px;
+  padding-left: 65px;
+  position: relative;
+  color: #515151;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  white-space: normal;
+}
+#resiger .reg-box .reginputbox #reg-btn {
+  height: 29px;
+  width: 90px;
+  margin-left: 170px;
+  margin-bottom: 20px;
+}
+#resiger .reg-box .img_right {
+  display: none;
+}

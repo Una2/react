@@ -12,5 +12,4 @@ const finalCreateStore = compose(
     DevTools.instrument()
 )(createStore);
 
-// const store = createStore(reducer,applyMiddleware(thunk,logger));
 export default finalCreateStore;
